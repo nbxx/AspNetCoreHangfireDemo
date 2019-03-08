@@ -42,6 +42,8 @@ namespace AspNetCoreHangfireDemo
             app.UseMvc();
 
             app.UseHangfireServer();
+
+            app.UseHangfireDashboard("/MyDashboard");
         }
     }
 }
