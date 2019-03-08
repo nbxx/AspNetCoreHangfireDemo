@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Hangfire;
+using Hangfire.Dashboard;
 using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,7 +44,12 @@ namespace AspNetCoreHangfireDemo
 
             app.UseHangfireServer();
 
-            app.UseHangfireDashboard("/MyDashboard");
+            //app.UseHangfireDashboard("/MyDashboard");
+
+            app.UseHangfireDashboard("/MyDashboard", new DashboardOptions()
+            {
+                Authorization = new List<IDashboardAuthorizationFilter>() { new MyDashboardAuthorizationFilter() },
+            });
         }
     }
 }
