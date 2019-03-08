@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Hangfire;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreHangfireDemo.Controllers
@@ -11,6 +12,21 @@ namespace AspNetCoreHangfireDemo.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IApplicationLifetime _applicationLifetime;
+
+        public ValuesController(IApplicationLifetime applicationLifetime)
+        {
+            _applicationLifetime = applicationLifetime;
+        }
+
+
+        [HttpGet("stopApp")]
+        public IActionResult StopApp()
+        {
+            _applicationLifetime.StopApplication();
+            return new EmptyResult();
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
