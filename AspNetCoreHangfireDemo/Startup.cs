@@ -42,9 +42,14 @@ namespace AspNetCoreHangfireDemo
 
             app.UseMvc();
 
-            app.UseHangfireServer();
-
-            //app.UseHangfireDashboard("/MyDashboard");
+            app.UseHangfireServer(new BackgroundJobServerOptions
+            {
+                Queues = new[]
+                {
+                    "myqueue1",
+                    "myqueue2"
+                }
+            });
 
             app.UseHangfireDashboard("/MyDashboard", new DashboardOptions()
             {

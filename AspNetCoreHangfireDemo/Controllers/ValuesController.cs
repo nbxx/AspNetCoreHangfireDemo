@@ -31,7 +31,7 @@ namespace AspNetCoreHangfireDemo.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            BackgroundJob.Enqueue(() => Console.WriteLine("Send an email to user..."));
+            RecurringJob.AddOrUpdate(() => Console.WriteLine("Send an email to user..."), Cron.Minutely(), queue: "myqueue1");
 
             return new string[] { "value1", "value2" };
         }

@@ -13,7 +13,7 @@ namespace AspNetCoreHangfireDemo
         {
             var clientIp = context.GetHttpContext().Request?.HttpContext?.Connection?.RemoteIpAddress?.MapToIPv4()?.ToString();
 
-            return clientIp == "127.0.0.1";
+            return true;
         }
     }
 }
