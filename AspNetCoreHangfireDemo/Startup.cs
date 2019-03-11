@@ -51,6 +51,8 @@ namespace AspNetCoreHangfireDemo
                 }
             });
 
+            GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute { Attempts = 0 });
+
             app.UseHangfireDashboard("/MyDashboard", new DashboardOptions()
             {
                 Authorization = new List<IDashboardAuthorizationFilter>() { new MyDashboardAuthorizationFilter() },
